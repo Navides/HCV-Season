@@ -75,7 +75,7 @@ class Config {
             });
         }
 
-        // 秒数差で昇順ソート
+        // 日数差で昇順ソート
         distances.sort((a, b) => {
             return a.distance - b.distance;
         });
