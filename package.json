@@ -1,6 +1,6 @@
 {
     "name": "hcv-season",
-    "version": "0.1.3",
+    "version": "0.1.0",
     "description": "This is a library provides color changes according to season.",
     "main": "dist/hcv-season.min.js",
     "scripts": {
