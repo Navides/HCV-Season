@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<head>
+    <title>rgb using percentages and actual color</title>
+    <style>
+        div.console {
+            border: solid 1px black;
+            margin: 0.3rem;
+            padding: 0.3rem;
+            width: 20rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            position: relative;
+        }
+
+        table caption {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        table caption::after {
+            content: " : ";
+        }
+
+        table tr th {
+            background-color: white;
+            border: solid 1px black;
+            position: sticky;
+            top: 0;
+        }
+
+        table tr td {
+            border: solid 1px black;
+            text-align: center;
+        }
+
+        table tr th:nth-child(1) {
+            min-width: 5rem;
+        }
+
+        table tr th:nth-child(2) {
+            background-color: #ff9797;
+            min-width: 4rem;
+        }
+
+        table tr th:nth-child(3) {
+            background-color: #85ffa7;
+            min-width: 4rem;
+        }
+
+        table tr th:nth-child(4) {
+            background-color: #8594ff;
+            min-width: 4rem;
+        }
+
+        table tr th:nth-child(5) {
+            min-width: 5rem;
+        }
+
+        table tr th:nth-child(6),
+        table tr th:nth-child(7),
+        table tr th:nth-child(8) {
+            color: red;
+            font-size: 0.8rem;
+            font-weight: 100;
+            min-width: 4rem;
+        }
+
+        table tr td:nth-child(2) {
+            background-color: #ffc6c6;
+        }
+
+        table tr td:nth-child(3) {
+            background-color: #c6ffd6;
+        }
+
+        table tr td:nth-child(4) {
+            background-color: #c6cdff;
+        }
+
+        p {
+            color: red;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+            text-align: left;
+        }
+    </style>
+    <script>
+        // %指定RGB値と、実際に適用される値の対応表を作成
+        const search = () => {
+            // ダミー要素
+            const element = document.createElement("div");
+            document.body.append(element);
+
+            // RGB値の指定に対して、実際に適用される値の取得
+            const getComputedValue = (value, target) => {
+                // 検証用のプロパティを作成
+                const expression = function() {
+                    switch (target) {
+                        case "r": return `rgb(${value}, 0%, 0%)`;
+                        case "g": return `rgb(0%, ${value}, 0%)`;
+                        case "b": return `rgb(0%, 0%, ${value})`;
+                        default : return null;
+                    }
+                }();
+                if (expression == null) return;
+
+                // プロパティの反映結果を取得
+                element.style.backgroundColor = expression;
+                const style = window.getComputedStyle(element, "background-color");
+                const computedStyle = style.getPropertyValue("background-color");
+                
+                // 反映結果のRGBを取得
+                const [ head, tail ] = [ "rgb(", ")" ];
+                const bodyStart = computedStyle.indexOf(head) + head.length;
+                const bodyEnd = computedStyle.indexOf(tail);
+                const body = computedStyle.substring(bodyStart, bodyEnd);
+                const rgb = body.split(",").map(x => x.trim());
+
+                // 検証対象に対応する値を返す
+                const computedValue = function() {
+                    switch (target) {
+                        case "r": return rgb[0];
+                        case "g": return rgb[1];
+                        case "b": return rgb[2];
+                        default : return null;
+                    }
+                }();
+                return computedValue;
+            }
+
+            // 検証結果を取得
+            let results = function() {
+                const items = [];
+                for (let i = 0; i < 100; i += 0.1) {
+                    const percent = `${i.toFixed(1)}%`;
+                    const getValue = target => getComputedValue(percent, target);
+                    const value = (255 * (Number(i.toFixed(3))/100)).toFixed(3);
+                    items.push({
+                        percent: percent,
+                        r: getValue("r"),
+                        g: getValue("g"),
+                        b: getValue("b"),
+                        raw: value,
+                        roundDown: Math.floor(value),
+                        roundUp: Math.ceil(value),
+                        roundOff: Math.round(value)
+                    });
+                }
+                return items;
+            }();
+
+            // 選択されている検索条件を取得
+            const target = function() {
+                const radioItems = document.getElementsByName("target");
+                for (const radioItem of radioItems) {
+                    if (!radioItem.checked) continue;
+                    return radioItem.value; 
+                }
+            }();
+
+            // 検索条件を適用
+            const numberOfAll = results.length;
+            switch (target) {
+                case "rgb-unmatched":
+                    results = results.filter(x => x.r != x.g || x.g != x.b);
+                    break;
+                case "not-ru":
+                    results = results.filter(x => x.r != x.roundUp || x.g != x.roundUp || x.b != x.roundUp);
+                    break;
+                case "not-ro":
+                    results = results.filter(x => x.r != x.roundOff || x.g != x.roundOff || x.b != x.roundOff);
+                    break;
+                case "not-rd":
+                    results = results.filter(x => x.r != x.roundDown || x.g != x.roundDown || x.b != x.roundDown);
+                    break;
+            }
+            const numberOfShown = results.length;
+
+            // ヒット数を表示
+            const message = document.getElementById("message");
+            message.innerText = `${numberOfShown} / ${numberOfAll}`;
+
+            // 結果をクリア
+            const table = document.getElementById("rgb-percent-to-value");
+            while (table.lastChild && table.children.length > 1) {
+                table.removeChild(table.lastChild);
+            }
+
+            // 結果をテーブルに追加
+            for (const result of results) {
+                // テーブルセルを作成
+                const cells = Object.keys(result).map(x => {
+                    const cell = document.createElement("td");
+                    cell.innerText = result[x];
+                    return cell;
+                });
+
+                // 行にまとめて追加
+                const row = document.createElement("tr");
+                row.append(...cells);
+                table.append(row);
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", search);
+    </script>
+</head>
+<body>
+    <div class="console">
+        <input type="radio" name="target" value="all" checked>no filter<br>
+        <input type="radio" name="target" value="rgb-unmatched">unmatched: rgb values<br>
+        <input type="radio" name="target" value="not-ru">unmatched: round up<br>
+        <input type="radio" name="target" value="not-ro">unmatched: round off<br>
+        <input type="radio" name="target" value="not-rd">unmatched: round down<br>
+        <button onclick="search();">Search</button>
+    </div>
+    <div id="message"></div>
+    <table id="rgb-percent-to-value">
+        <tr>
+            <th>%</th>
+            <th>r</th>
+            <th>g</th>
+            <th>b</th>
+            <th>raw</th>
+            <th><a href="#astarisk1">*1</a></th>
+            <th><a href="#astarisk2">*2</a></th>
+            <th><a href="#astarisk3">*3</a></th>
+        </tr>
+    </table>
+    <p id="astarisk1">*1 : rounding up</p>
+    <p id="astarisk2">*2 : rounding down</p>
+    <p id="astarisk3">*3 : rounding off</p>
+</body>
+</html>
