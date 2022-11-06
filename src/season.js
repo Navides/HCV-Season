@@ -81,10 +81,10 @@ class Season {
         if (!source) source = {};
 
         const config = new Config();
-        config.now = source.now || config.now;
+        config.today = source.today || config.today;
         config.impact = source.impact || config.impact;
         config.numberOfLimitReflection = source.numberOfLimitReflection || config.numberOfLimitReflection;
-        config.brightness = source.brightness || config.brightness;
+        config.season = source.season || config.season;
 
         return config;
     }

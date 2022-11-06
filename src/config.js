@@ -65,7 +65,7 @@ class Config {
             }
 
             // 対象時間の設定色があれば、そちらを利用
-            const distance = getSecondDifference(themeDate, this.now);
+            const distance = getSecondDifference(themeDate, this.today);
             if (distance === 0) return getColor(this.season[season]);
 
             // 時間毎の距離を記録
@@ -75,7 +75,7 @@ class Config {
             });
         }
 
-        // 秒数差で昇順ソート
+        // 日数差で昇順ソート
         distances.sort((a, b) => {
             return a.distance - b.distance;
         });
