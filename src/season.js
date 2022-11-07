@@ -100,7 +100,7 @@ class Season {
         config = this._createConfig(config);
 
         // 最大適用回数を超えていれば処理終了
-        const reflectionCountKey = "numberOfLimitReflection";
+        const reflectionCountKey = "numberOfLimitSeasonReflection";
         const reflectionCount = element.dataset[reflectionCountKey] ? Number(element.dataset[reflectionCountKey]) : 0;
         if (reflectionCount >= config.numberOfLimitReflection) {
             return;
