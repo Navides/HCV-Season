@@ -13,7 +13,7 @@
 <br>
 
 ## Summary
-HCV-Season is a library provides color changes according to season, like red as summar, blue as winter, brown as autumn, green as spring.
+HCV-Season is a library provides color changes according to season, like red as summar, blue as winter, brown as autumn, green as spring. Seasonal colors are customizable.
 
 ## Installation
 ```
