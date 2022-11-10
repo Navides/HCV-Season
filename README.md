@@ -26,7 +26,7 @@ npm i hcv-season
 // reflect current season to page
 const season = require("hcv-season");
 const props = [ "background-color",  "border-color", "color" ];
-const config = { today, new Date(), impact: 0.1 };
+const config = { today: new Date(), impact: 0.1 };
 season.reflectToPage(props, config);
 ```
 
@@ -36,7 +36,7 @@ season.reflectToPage(props, config);
 const ele = document.getElementById("something");
 const season = require("hcv-season");
 const props = [ "background-color",  "border-color", "color" ];
-const config = { today, new Date(), impact: 0.1 };
+const config = { today: new Date(), impact: 0.1 };
 season.reflectToElement(ele, props, config);
 ```
 
@@ -44,6 +44,6 @@ season.reflectToElement(ele, props, config);
 ```javascript
 // reflect current season to color
 const season = require("hcv-season");
-const config = { today, new Date(), impact: 0.1 };
+const config = { today: new Date(), impact: 0.1 };
 const color = season.getReflectionColor("#333333");
 ```
