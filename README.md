@@ -4,10 +4,10 @@
 
 <blockquote>
     <p>
-        ‘‘ (Nothing)
+        ‘‘ Developers stay home and then forget the season.
     </p>
     <p align="right">
-        No one
+        A random president
     </p>
 </blockquote>
 <br>
