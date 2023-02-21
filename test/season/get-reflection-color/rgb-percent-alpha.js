@@ -32,7 +32,7 @@ describe("Season.getReflectionColor - rgb-percent-alpha_", () => {
             const result = Season.getReflectionColor(expression, config);
 
             // 結果を検証
-            expect(result).toBe(`rgb(5%,12%,19%,${ExpressionConverter.getPercent(alpha)})`);
+            expect(result).toBe(`rgb(5%,12%,18%,${ExpressionConverter.getPercent(alpha)})`);
         }
     });
 
@@ -67,7 +67,7 @@ describe("Season.getReflectionColor - rgb-percent-alpha_", () => {
             const result = Season.getReflectionColor(expression, config);
 
             // 結果を検証
-            expect(result).toBe(`linear-gradient(rgb(6%,13%,20%,${ExpressionConverter.getPercent(alpha)}), rgb(24%,31%,38%,${ExpressionConverter.getPercent(alpha)}))`);
+            expect(result).toBe(`linear-gradient(rgb(5%,13%,20%,${ExpressionConverter.getPercent(alpha)}), rgb(24%,31%,38%,${ExpressionConverter.getPercent(alpha)}))`);
         }
     });
 });

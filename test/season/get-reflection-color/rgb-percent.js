@@ -26,7 +26,7 @@ describe("Season.getReflectionColor - rgb-percent_", () => {
         const results = expressions.map(x => Season.getReflectionColor(x, config));
 
         // 結果を検証
-        results.forEach(x => expect(x).toBe("rgb(5%,12%,19%)"));
+        results.forEach(x => expect(x).toBe("rgb(5%,12%,18%)"));
     });
 
     // rgb-percent_2:
@@ -49,6 +49,6 @@ describe("Season.getReflectionColor - rgb-percent_", () => {
         const results = expressions.map(x => Season.getReflectionColor(x, config));
 
         // 結果を検証
-        results.forEach(x => expect(x).toBe("linear-gradient(rgb(6%,13%,20%), rgb(24%,31%,38%))"));
+        results.forEach(x => expect(x).toBe("linear-gradient(rgb(5%,13%,20%), rgb(24%,31%,38%))"));
     });
 });

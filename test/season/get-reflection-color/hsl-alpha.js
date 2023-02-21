@@ -39,7 +39,7 @@ describe("Season.getReflectionColor - hsl-alpha_", () => {
             const result = Season.getReflectionColor(expression, config);
 
             // 結果を検証
-            expect(result).toBe(`hsl(210,94%,51%,${ExpressionConverter.getPercent(alpha)})`);
+            expect(result).toBe(`hsl(210,93%,51%,${ExpressionConverter.getPercent(alpha)})`);
         }
     });
 

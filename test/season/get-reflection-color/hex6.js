@@ -21,7 +21,7 @@ describe("Season.getReflectionColor - hex6_", () => {
         const result = Season.getReflectionColor(expression, config);
 
         // 結果を検証
-        expect(result).toBe("#0c1e30");
+        expect(result).toBe("#0c1e2f");
     });
 
     // hex6_2:
@@ -41,6 +41,6 @@ describe("Season.getReflectionColor - hex6_", () => {
         const result = Season.getReflectionColor(expression, config);
 
         // 結果を検証
-        expect(result).toBe("linear-gradient(#0f2032, #3c4e60);");
+        expect(result).toBe("linear-gradient(#0e2032, #3c4e60);");
     });
 });

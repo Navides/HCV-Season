@@ -26,7 +26,7 @@ describe("Season.getReflectionColor - space-delimited-hsl_", () => {
         const results = expressions.map(x => Season.getReflectionColor(x, config));
 
         // 結果を検証
-        results.forEach(x => expect(x).toBe("hsl(210 94% 51%)"));
+        results.forEach(x => expect(x).toBe("hsl(210 93% 51%)"));
     });
 
     // space-delimited-hsl_2

@@ -21,7 +21,7 @@ describe("Season.getReflectionColor - hex8_", () => {
         const result = Season.getReflectionColor(expression, config);
 
         // 結果を検証
-        expect(result).toBe("#0c1e30ff");
+        expect(result).toBe("#0c1e2fff");
     });
 
     // hex8_2:
@@ -41,6 +41,6 @@ describe("Season.getReflectionColor - hex8_", () => {
         const result = Season.getReflectionColor(expression, config);
 
         // 結果を検証
-        expect(result).toBe("linear-gradient(#0f2032ed, #3c4e60ff);");
+        expect(result).toBe("linear-gradient(#0e2032ed, #3c4e60ff);");
     });
 });

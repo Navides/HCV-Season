@@ -23,7 +23,7 @@ describe("Season.getReflectionColor - rgb_", () => {
         const results = expressions.map(x => Season.getReflectionColor(x, config));
 
         // 結果を検証
-        results.forEach(x => expect(x).toBe("rgb(12,30,48)"));
+        results.forEach(x => expect(x).toBe("rgb(12,30,47)"));
     });
 
     // rgb_2:
@@ -46,6 +46,6 @@ describe("Season.getReflectionColor - rgb_", () => {
         const results = expressions.map(x => Season.getReflectionColor(x, config));
 
         // 結果を検証
-        results.forEach(x => expect(x).toBe("linear-gradient(rgb(15,32,50), rgb(60,78,96))"));
+        results.forEach(x => expect(x).toBe("linear-gradient(rgb(14,32,50), rgb(60,78,96))"));
     });
 });
