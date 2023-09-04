@@ -111,7 +111,7 @@ class Season {
             // プロパティの設定がなければ処理を終了
             let style = window.getComputedStyle(element, "");
             if (!style[property]) {
-                return;
+                continue;
             }
 
             // 色表現を抽出
